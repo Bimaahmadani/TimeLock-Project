@@ -1,0 +1,24 @@
+# ninja log v6
+16	1235	7763688149944143	TimeLock_autogen/timestamp	64497e9ed3ca20c3
+16	1235	7763688149944143	TimeLock_autogen/mocs_compilation.cpp	64497e9ed3ca20c3
+16	1235	7763688149944143	D:/KULIAH/Semester Antara/Alprog/Tugas Besar/TimeLock/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/TimeLock_autogen/timestamp	64497e9ed3ca20c3
+16	1235	7763688149944143	D:/KULIAH/Semester Antara/Alprog/Tugas Besar/TimeLock/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/TimeLock_autogen/mocs_compilation.cpp	64497e9ed3ca20c3
+1296	4768	7763688151446172	CMakeFiles/TimeLock.dir/main.cpp.obj	ad0a8a867175d782
+1243	4832	7763688150954132	CMakeFiles/TimeLock.dir/TimeLock_autogen/mocs_compilation.cpp.obj	f24520a49ea7aca4
+1334	6242	7763688151842908	CMakeFiles/TimeLock.dir/mainwindow.cpp.obj	ac236d88e7221196
+6243	7313	7763688200974416	TimeLock.exe	21749e2424946f58
+17	1540	7763713112918112	TimeLock_autogen/timestamp	64497e9ed3ca20c3
+17	1540	7763713112918112	TimeLock_autogen/mocs_compilation.cpp	64497e9ed3ca20c3
+17	1540	7763713112918112	D:/KULIAH/Semester Antara/Alprog/Tugas Besar/TimeLock/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/TimeLock_autogen/timestamp	64497e9ed3ca20c3
+17	1540	7763713112918112	D:/KULIAH/Semester Antara/Alprog/Tugas Besar/TimeLock/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/TimeLock_autogen/mocs_compilation.cpp	64497e9ed3ca20c3
+1584	7143	7763713114288653	CMakeFiles/TimeLock.dir/main.cpp.obj	ad0a8a867175d782
+1543	7217	7763713113939114	CMakeFiles/TimeLock.dir/TimeLock_autogen/mocs_compilation.cpp.obj	f24520a49ea7aca4
+1623	7657	7763713114717434	CMakeFiles/TimeLock.dir/mainwindow.cpp.obj	ac236d88e7221196
+10	1549	7763716307271762	TimeLock_autogen/timestamp	64497e9ed3ca20c3
+10	1549	7763716307271762	TimeLock_autogen/mocs_compilation.cpp	64497e9ed3ca20c3
+10	1549	7763716307271762	D:/KULIAH/Semester Antara/Alprog/Tugas Besar/TimeLock/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/TimeLock_autogen/timestamp	64497e9ed3ca20c3
+10	1549	7763716307271762	D:/KULIAH/Semester Antara/Alprog/Tugas Besar/TimeLock/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/TimeLock_autogen/mocs_compilation.cpp	64497e9ed3ca20c3
+1550	6464	7763716308200674	CMakeFiles/TimeLock.dir/TimeLock_autogen/mocs_compilation.cpp.obj	f24520a49ea7aca4
+1624	6517	7763716308922284	CMakeFiles/TimeLock.dir/main.cpp.obj	ad0a8a867175d782
+1660	8141	7763716309271566	CMakeFiles/TimeLock.dir/mainwindow.cpp.obj	ac236d88e7221196
+8142	9086	7763716374071356	TimeLock.exe	21749e2424946f58

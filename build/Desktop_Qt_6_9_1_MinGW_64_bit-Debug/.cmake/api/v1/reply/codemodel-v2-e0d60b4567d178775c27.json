@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-5ccc85eacdbf7dff0f9d.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "TimeLock",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "TimeLock::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-TimeLock-Debug-b09f3d5403a3889607a2.json",
+					"name" : "TimeLock",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "TimeLock_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-TimeLock_autogen-Debug-20dc772504ef8b7f9f1c.json",
+					"name" : "TimeLock_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "TimeLock_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-TimeLock_autogen_timestamp_deps-Debug-5af65a7ae9447d9ee97c.json",
+					"name" : "TimeLock_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "D:/KULIAH/Semester Antara/Alprog/Tugas Besar/TimeLock/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug",
+		"source" : "D:/KULIAH/Semester Antara/Alprog/Tugas Besar/TimeLock"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}
