@@ -41,6 +41,8 @@ private:
     int dailyLimit = 120;
     QTimer *trackingTimer;
     QSet<QString> notifiedApps;
+    int currentAppSeconds = 0; // detik penggunaan aplikasi aktif
+    QString lastActiveApp;     // untuk cek pergantian aplikas
 
     QString getActiveWindowTitle();
     void updateTable();

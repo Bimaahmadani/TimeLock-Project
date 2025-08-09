@@ -115,26 +115,38 @@ void MainWindow::trackActiveWindow() {
 
     for (auto &app : dataList) {
         if (activeTitle.contains(app.name, Qt::CaseInsensitive)) {
-            static int secCounter = 0;
-            secCounter++;
-            if (secCounter >= 60) {
+            // 🔹 Deteksi pergantian aplikasi
+            if (lastActiveApp != app.name) {
+                currentAppSeconds = 0;
+                lastActiveApp = app.name;
+            }
+
+            currentAppSeconds++;
+
+            // Setiap 60 detik, tambahkan durasi 1 menit
+            if (currentAppSeconds >= 60) {
                 app.duration++;
-                secCounter = 0;
+                currentAppSeconds = 0;
                 checkLimitForAll();
                 updateTable();
                 updateSummary();
             }
 
-            // 🔹 Progress bar untuk aplikasi yang sedang aktif
-            ui->progressBar->setMaximum(dailyLimit);
-            ui->progressBar->setValue(app.duration);
+            // 🔹 Update progress bar setiap detik
+            double totalSecondsUsed = (app.duration * 60) + currentAppSeconds;
+            double totalSecondsLimit = dailyLimit * 60;
+            int progressValue = static_cast<int>((totalSecondsUsed / totalSecondsLimit) * 100);
 
-            // 🔹 Notifikasi jika melebihi batas
-            if (app.duration > dailyLimit && !notifiedApps.contains(app.name)) {
+            ui->progressBar->setMaximum(100);
+            ui->progressBar->setValue(progressValue);
+
+            // 🔹 Notifikasi jika melebihi batas (hanya sekali per sesi)
+            if (app.duration >= dailyLimit && !notifiedApps.contains(app.name)) {
                 QMessageBox::warning(this, "Batas Terlampaui",
                                      QString("Penggunaan %1 melebihi batas waktu!").arg(app.name));
                 notifiedApps.insert(app.name);
             }
+
             break;
         }
     }
