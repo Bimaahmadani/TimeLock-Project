@@ -48,7 +48,7 @@ void MainWindow::on_addButton_clicked() {
             return;
         }
     }
-    dataList.append({selectedApp, 0, "Aman"});
+    dataList.append({selectedApp, 0, 0, "Aman"});
     updateTable();
     updateSummary();
 }
@@ -115,38 +115,43 @@ void MainWindow::trackActiveWindow() {
 
     for (auto &app : dataList) {
         if (activeTitle.contains(app.name, Qt::CaseInsensitive)) {
-            // 🔹 Deteksi pergantian aplikasi
-            if (lastActiveApp != app.name) {
-                currentAppSeconds = 0;
-                lastActiveApp = app.name;
-            }
 
-            currentAppSeconds++;
+            // Tambah detik penggunaan
+            app.seconds++;
 
-            // Setiap 60 detik, tambahkan durasi 1 menit
-            if (currentAppSeconds >= 60) {
+            // Jika sudah 60 detik → tambah menit
+            if (app.seconds >= 60) {
                 app.duration++;
-                currentAppSeconds = 0;
-                checkLimitForAll();
-                updateTable();
-                updateSummary();
+                app.seconds = 0;
             }
 
-            // 🔹 Update progress bar setiap detik
-            double totalSecondsUsed = (app.duration * 60) + currentAppSeconds;
+            // Hitung total detik penggunaan aplikasi aktif
+            double totalSecondsUsed = (app.duration * 60) + app.seconds;
             double totalSecondsLimit = dailyLimit * 60;
-            int progressValue = static_cast<int>((totalSecondsUsed / totalSecondsLimit) * 100);
 
+            // Update progress bar aplikasi aktif
+            int progressValue = static_cast<int>((totalSecondsUsed / totalSecondsLimit) * 100);
             ui->progressBar->setMaximum(100);
             ui->progressBar->setValue(progressValue);
 
-            // 🔹 Notifikasi jika melebihi batas (hanya sekali per sesi)
-            if (app.duration >= dailyLimit && !notifiedApps.contains(app.name)) {
-                QMessageBox::warning(this, "Batas Terlampaui",
-                                     QString("Penggunaan %1 melebihi batas waktu!").arg(app.name));
-                notifiedApps.insert(app.name);
+            // Status per aplikasi → langsung berubah jika lewat 1 detik dari batas
+            if (totalSecondsUsed > totalSecondsLimit) {
+                app.status = "Melebihi Batas";
+
+                if (!notifiedApps.contains(app.name)) {
+                    QMessageBox::warning(this, "Batas Terlampaui",
+                                         QString("Penggunaan %1 melebihi batas waktu!").arg(app.name));
+                    notifiedApps.insert(app.name);
+                }
+            } else if (totalSecondsUsed >= totalSecondsLimit * 0.8) {
+                app.status = "Mendekati Batas";
+            } else {
+                app.status = "Aman";
             }
 
+            // Update tabel dan ringkasan
+            updateTable();
+            updateSummary();
             break;
         }
     }
@@ -154,31 +159,50 @@ void MainWindow::trackActiveWindow() {
 
 // Update tabel
 void MainWindow::updateTable() {
-    ui->tableWidget->setRowCount(0);
-    for (const auto &app : dataList) {
-        int row = ui->tableWidget->rowCount();
-        ui->tableWidget->insertRow(row);
-        ui->tableWidget->setItem(row, 0, new QTableWidgetItem(app.name));
-        ui->tableWidget->setItem(row, 1, new QTableWidgetItem(QString::number(app.duration)));
-        ui->tableWidget->setItem(row, 2, new QTableWidgetItem(app.status));
+    ui->tableWidget->setRowCount(dataList.size());
+    for (int i = 0; i < dataList.size(); ++i) {
+        const auto &app = dataList[i];
+
+        ui->tableWidget->setItem(i, 0, new QTableWidgetItem(app.name));
+        ui->tableWidget->setItem(i, 1, new QTableWidgetItem(
+                                           QString("%1:%2")
+                                               .arg(app.duration, 2, 10, QChar('0'))
+                                               .arg(app.seconds, 2, 10, QChar('0'))
+                                           ));
+        ui->tableWidget->setItem(i, 2, new QTableWidgetItem(app.status));
     }
 }
 
+
 // Update ringkasan
 void MainWindow::updateSummary() {
-    int total = 0;
-    for (const auto &app : dataList) total += app.duration;
-    ui->totalLabel->setText(QString::number(total));
-    ui->progressBar->setMaximum(dailyLimit);
-    ui->progressBar->setValue(total);
+    int totalSeconds = 0;
+    for (const auto &app : dataList) {
+        totalSeconds += (app.duration * 60) + app.seconds;
+    }
 
+    // Format total waktu jadi MM:SS
+    int minutes = totalSeconds / 60;
+    int seconds = totalSeconds % 60;
+    ui->totalLabel->setText(QString("%1:%2")
+                                .arg(minutes, 2, 10, QChar('0'))
+                                .arg(seconds, 2, 10, QChar('0')));
+
+    // Hitung batas total harian (dalam detik)
+    int totalLimitSeconds = dailyLimit * 60;
+
+    // Tentukan status global
     QString status;
-    if (total > dailyLimit) status = "Melebihi Batas";
-    else if (total >= dailyLimit * 0.8) status = "Mendekati Batas";
-    else status = "Aman";
-
+    if (totalSeconds > totalLimitSeconds) {
+        status = "Melebihi Batas";
+    } else if (totalSeconds >= totalLimitSeconds * 0.8) {
+        status = "Mendekati Batas";
+    } else {
+        status = "Aman";
+    }
     ui->statusLabel->setText(status);
 }
+
 
 // Cek batas untuk semua aplikasi
 void MainWindow::checkLimitForAll() {
@@ -205,26 +229,33 @@ void MainWindow::loadFromCsv(const QString &filePath) {
     if (file.open(QIODevice::ReadOnly)) {
         dataList.clear();
         QTextStream in(&file);
-        QString header = in.readLine();
+        QString header = in.readLine(); // Lewati header
         while (!in.atEnd()) {
             QString line = in.readLine();
             auto parts = line.split(",");
             if (parts.size() >= 3) {
-                dataList.append({parts[0], parts[1].toInt(), parts[2]});
+                // name, duration, seconds, status
+                dataList.append({parts[0], parts[1].toInt(), 0, parts[2]});
             }
         }
     }
 }
 
+
 void MainWindow::on_resetButton_clicked() {
     QString selectedApp = ui->appSelectCombo->currentText();
     for (auto &app : dataList) {
         if (app.name == selectedApp) {
-            app.duration = 0;
+            app.duration = 0;   // Reset menit
+            app.seconds = 0;    // 🔹 Reset detik juga
             app.status = "Aman";
+
+            // Hapus dari daftar notifikasi supaya bisa memberi peringatan lagi
+            notifiedApps.remove(app.name);
             break;
         }
     }
     updateTable();
     updateSummary();
 }
+

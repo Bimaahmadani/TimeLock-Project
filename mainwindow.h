@@ -14,6 +14,7 @@ QT_END_NAMESPACE
 struct AppUsage {
     QString name;
     int duration; // menit
+    int seconds;
     QString status;
 };
 
