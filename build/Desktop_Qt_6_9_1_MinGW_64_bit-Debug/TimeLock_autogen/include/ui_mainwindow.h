@@ -12,17 +12,19 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QCheckBox>
+#include <QtWidgets/QComboBox>
+#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
-#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QProgressBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTableWidget>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -32,54 +34,32 @@ class Ui_MainWindow
 public:
     QWidget *centralwidget;
     QLabel *label;
-    QGroupBox *groupBox;
-    QWidget *horizontalLayoutWidget;
-    QHBoxLayout *horizontalLayout;
-    QLabel *label_2;
-    QLineEdit *nameAppinput;
-    QWidget *horizontalLayoutWidget_2;
-    QHBoxLayout *horizontalLayout_2;
-    QLabel *label_3;
-    QSpinBox *durationBox;
-    QPushButton *addButton;
-    QGroupBox *groupBox_2;
-    QWidget *horizontalLayoutWidget_3;
-    QHBoxLayout *horizontalLayout_3;
-    QLabel *label_4;
+    QGroupBox *groupBoxReport;
+    QVBoxLayout *verticalLayoutTable;
+    QTableWidget *tableWidget;
+    QGroupBox *groupBoxSetting;
+    QGridLayout *gridLayoutSetting;
+    QLabel *labelLimit;
     QSpinBox *limitdurationBox;
-    QLabel *label_6;
     QPushButton *checklimitButton;
-    QWidget *horizontalLayoutWidget_4;
-    QHBoxLayout *horizontalLayout_4;
-    QLabel *label_5;
-    QLineEdit *searchInput;
-    QPushButton *searchButton;
-    QPushButton *sortButton;
-    QWidget *horizontalLayoutWidget_10;
-    QHBoxLayout *horizontalLayout_10;
     QCheckBox *autoTrackCheck;
-    QLabel *label_15;
     QLabel *currentAppLabel;
-    QWidget *horizontalLayoutWidget_11;
-    QHBoxLayout *horizontalLayout_11;
     QPushButton *startTrackingButton;
     QPushButton *stopTrackingButton;
-    QGroupBox *groupBox_3;
-    QTableWidget *tableWidget;
-    QGroupBox *groupBox_4;
-    QWidget *horizontalLayoutWidget_5;
-    QHBoxLayout *horizontalLayout_5;
-    QLabel *label_7;
-    QLabel *totalLabel;
-    QLabel *label_8;
-    QLabel *label_12;
+    QPushButton *resetButton;
+    QGroupBox *groupBoxInput;
+    QHBoxLayout *horizontalLayoutInput;
+    QComboBox *appSelectCombo;
+    QPushButton *addButton;
+    QGroupBox *groupBoxSetting_2;
+    QGridLayout *gridLayoutSetting_2;
     QLabel *statusLabel;
-    QWidget *horizontalLayoutWidget_6;
-    QHBoxLayout *horizontalLayout_6;
+    QLabel *labelLimit_2;
+    QLabel *totalLabel;
+    QLabel *labelLimit_3;
     QProgressBar *progressBar;
-    QLabel *label_9;
-    QWidget *horizontalLayoutWidget_7;
-    QHBoxLayout *horizontalLayout_7;
+    QWidget *horizontalLayoutWidget;
+    QHBoxLayout *horizontalLayout;
     QPushButton *saveButton;
     QPushButton *loadCsvButton;
     QStatusBar *statusbar;
@@ -88,12 +68,12 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(900, 900);
+        MainWindow->resize(550, 720);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
         label = new QLabel(centralwidget);
         label->setObjectName("label");
-        label->setGeometry(QRect(0, 0, 900, 51));
+        label->setGeometry(QRect(0, 0, 551, 51));
         QFont font;
         font.setFamilies({QString::fromUtf8("Montserrat Ace")});
         font.setPointSize(20);
@@ -104,273 +84,124 @@ public:
         label->setTextFormat(Qt::TextFormat::AutoText);
         label->setAlignment(Qt::AlignmentFlag::AlignCenter);
         label->setWordWrap(false);
-        groupBox = new QGroupBox(centralwidget);
-        groupBox->setObjectName("groupBox");
-        groupBox->setGeometry(QRect(70, 70, 751, 141));
-        QFont font1;
-        font1.setFamilies({QString::fromUtf8("Montserrat Ace")});
-        font1.setPointSize(11);
-        font1.setBold(true);
-        groupBox->setFont(font1);
-        horizontalLayoutWidget = new QWidget(groupBox);
-        horizontalLayoutWidget->setObjectName("horizontalLayoutWidget");
-        horizontalLayoutWidget->setGeometry(QRect(0, 29, 751, 53));
-        horizontalLayout = new QHBoxLayout(horizontalLayoutWidget);
-        horizontalLayout->setObjectName("horizontalLayout");
-        horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        label_2 = new QLabel(horizontalLayoutWidget);
-        label_2->setObjectName("label_2");
-        QFont font2;
-        font2.setFamilies({QString::fromUtf8("Arial")});
-        font2.setPointSize(9);
-        font2.setBold(false);
-        label_2->setFont(font2);
+        groupBoxReport = new QGroupBox(centralwidget);
+        groupBoxReport->setObjectName("groupBoxReport");
+        groupBoxReport->setGeometry(QRect(10, 300, 517, 191));
+        verticalLayoutTable = new QVBoxLayout(groupBoxReport);
+        verticalLayoutTable->setObjectName("verticalLayoutTable");
+        tableWidget = new QTableWidget(groupBoxReport);
+        tableWidget->setObjectName("tableWidget");
 
-        horizontalLayout->addWidget(label_2);
+        verticalLayoutTable->addWidget(tableWidget);
 
-        nameAppinput = new QLineEdit(horizontalLayoutWidget);
-        nameAppinput->setObjectName("nameAppinput");
+        groupBoxSetting = new QGroupBox(centralwidget);
+        groupBoxSetting->setObjectName("groupBoxSetting");
+        groupBoxSetting->setGeometry(QRect(10, 155, 517, 148));
+        gridLayoutSetting = new QGridLayout(groupBoxSetting);
+        gridLayoutSetting->setObjectName("gridLayoutSetting");
+        labelLimit = new QLabel(groupBoxSetting);
+        labelLimit->setObjectName("labelLimit");
 
-        horizontalLayout->addWidget(nameAppinput);
+        gridLayoutSetting->addWidget(labelLimit, 0, 0, 1, 1);
 
-        horizontalLayoutWidget_2 = new QWidget(groupBox);
-        horizontalLayoutWidget_2->setObjectName("horizontalLayoutWidget_2");
-        horizontalLayoutWidget_2->setGeometry(QRect(0, 80, 751, 51));
-        horizontalLayout_2 = new QHBoxLayout(horizontalLayoutWidget_2);
-        horizontalLayout_2->setObjectName("horizontalLayout_2");
-        horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
-        label_3 = new QLabel(horizontalLayoutWidget_2);
-        label_3->setObjectName("label_3");
-        label_3->setMaximumSize(QSize(120, 16777215));
-        label_3->setFont(font2);
-
-        horizontalLayout_2->addWidget(label_3);
-
-        durationBox = new QSpinBox(horizontalLayoutWidget_2);
-        durationBox->setObjectName("durationBox");
-
-        horizontalLayout_2->addWidget(durationBox);
-
-        addButton = new QPushButton(horizontalLayoutWidget_2);
-        addButton->setObjectName("addButton");
-        addButton->setEnabled(true);
-        addButton->setMaximumSize(QSize(120, 16777215));
-        addButton->setFont(font2);
-
-        horizontalLayout_2->addWidget(addButton);
-
-        groupBox_2 = new QGroupBox(centralwidget);
-        groupBox_2->setObjectName("groupBox_2");
-        groupBox_2->setGeometry(QRect(70, 210, 751, 231));
-        groupBox_2->setFont(font1);
-        horizontalLayoutWidget_3 = new QWidget(groupBox_2);
-        horizontalLayoutWidget_3->setObjectName("horizontalLayoutWidget_3");
-        horizontalLayoutWidget_3->setGeometry(QRect(0, 29, 751, 53));
-        horizontalLayout_3 = new QHBoxLayout(horizontalLayoutWidget_3);
-        horizontalLayout_3->setObjectName("horizontalLayout_3");
-        horizontalLayout_3->setContentsMargins(0, 0, 0, 0);
-        label_4 = new QLabel(horizontalLayoutWidget_3);
-        label_4->setObjectName("label_4");
-        label_4->setMaximumSize(QSize(180, 16777215));
-        label_4->setFont(font2);
-
-        horizontalLayout_3->addWidget(label_4);
-
-        limitdurationBox = new QSpinBox(horizontalLayoutWidget_3);
+        limitdurationBox = new QSpinBox(groupBoxSetting);
         limitdurationBox->setObjectName("limitdurationBox");
 
-        horizontalLayout_3->addWidget(limitdurationBox);
+        gridLayoutSetting->addWidget(limitdurationBox, 0, 1, 1, 1);
 
-        label_6 = new QLabel(horizontalLayoutWidget_3);
-        label_6->setObjectName("label_6");
-        label_6->setMaximumSize(QSize(50, 16777215));
-        label_6->setFont(font2);
-        label_6->setAlignment(Qt::AlignmentFlag::AlignCenter);
-
-        horizontalLayout_3->addWidget(label_6);
-
-        checklimitButton = new QPushButton(horizontalLayoutWidget_3);
+        checklimitButton = new QPushButton(groupBoxSetting);
         checklimitButton->setObjectName("checklimitButton");
-        checklimitButton->setEnabled(true);
-        checklimitButton->setMaximumSize(QSize(140, 16777215));
-        checklimitButton->setFont(font2);
 
-        horizontalLayout_3->addWidget(checklimitButton);
+        gridLayoutSetting->addWidget(checklimitButton, 0, 2, 1, 1);
 
-        horizontalLayoutWidget_4 = new QWidget(groupBox_2);
-        horizontalLayoutWidget_4->setObjectName("horizontalLayoutWidget_4");
-        horizontalLayoutWidget_4->setGeometry(QRect(0, 80, 751, 51));
-        horizontalLayout_4 = new QHBoxLayout(horizontalLayoutWidget_4);
-        horizontalLayout_4->setObjectName("horizontalLayout_4");
-        horizontalLayout_4->setContentsMargins(0, 0, 0, 0);
-        label_5 = new QLabel(horizontalLayoutWidget_4);
-        label_5->setObjectName("label_5");
-        label_5->setMaximumSize(QSize(120, 16777215));
-        label_5->setFont(font2);
-
-        horizontalLayout_4->addWidget(label_5);
-
-        searchInput = new QLineEdit(horizontalLayoutWidget_4);
-        searchInput->setObjectName("searchInput");
-
-        horizontalLayout_4->addWidget(searchInput);
-
-        searchButton = new QPushButton(horizontalLayoutWidget_4);
-        searchButton->setObjectName("searchButton");
-        searchButton->setEnabled(true);
-        searchButton->setMaximumSize(QSize(120, 16777215));
-        searchButton->setFont(font2);
-
-        horizontalLayout_4->addWidget(searchButton);
-
-        sortButton = new QPushButton(horizontalLayoutWidget_4);
-        sortButton->setObjectName("sortButton");
-        sortButton->setEnabled(true);
-        sortButton->setMaximumSize(QSize(120, 16777215));
-        sortButton->setFont(font2);
-
-        horizontalLayout_4->addWidget(sortButton);
-
-        horizontalLayoutWidget_10 = new QWidget(groupBox_2);
-        horizontalLayoutWidget_10->setObjectName("horizontalLayoutWidget_10");
-        horizontalLayoutWidget_10->setGeometry(QRect(0, 130, 751, 51));
-        horizontalLayout_10 = new QHBoxLayout(horizontalLayoutWidget_10);
-        horizontalLayout_10->setObjectName("horizontalLayout_10");
-        horizontalLayout_10->setContentsMargins(0, 0, 0, 0);
-        autoTrackCheck = new QCheckBox(horizontalLayoutWidget_10);
+        autoTrackCheck = new QCheckBox(groupBoxSetting);
         autoTrackCheck->setObjectName("autoTrackCheck");
-        autoTrackCheck->setMaximumSize(QSize(210, 16777215));
-        autoTrackCheck->setFont(font2);
-        autoTrackCheck->setAcceptDrops(false);
 
-        horizontalLayout_10->addWidget(autoTrackCheck);
+        gridLayoutSetting->addWidget(autoTrackCheck, 1, 0, 1, 1);
 
-        label_15 = new QLabel(horizontalLayoutWidget_10);
-        label_15->setObjectName("label_15");
-        label_15->setMaximumSize(QSize(120, 16777215));
-        label_15->setFont(font2);
-
-        horizontalLayout_10->addWidget(label_15);
-
-        currentAppLabel = new QLabel(horizontalLayoutWidget_10);
+        currentAppLabel = new QLabel(groupBoxSetting);
         currentAppLabel->setObjectName("currentAppLabel");
-        currentAppLabel->setMaximumSize(QSize(300, 16777215));
-        currentAppLabel->setFont(font2);
 
-        horizontalLayout_10->addWidget(currentAppLabel);
+        gridLayoutSetting->addWidget(currentAppLabel, 1, 1, 1, 1);
 
-        horizontalLayoutWidget_11 = new QWidget(groupBox_2);
-        horizontalLayoutWidget_11->setObjectName("horizontalLayoutWidget_11");
-        horizontalLayoutWidget_11->setGeometry(QRect(0, 180, 281, 51));
-        horizontalLayout_11 = new QHBoxLayout(horizontalLayoutWidget_11);
-        horizontalLayout_11->setObjectName("horizontalLayout_11");
-        horizontalLayout_11->setContentsMargins(0, 0, 0, 0);
-        startTrackingButton = new QPushButton(horizontalLayoutWidget_11);
+        startTrackingButton = new QPushButton(groupBoxSetting);
         startTrackingButton->setObjectName("startTrackingButton");
-        startTrackingButton->setEnabled(true);
-        startTrackingButton->setMaximumSize(QSize(120, 16777215));
-        startTrackingButton->setFont(font2);
 
-        horizontalLayout_11->addWidget(startTrackingButton);
+        gridLayoutSetting->addWidget(startTrackingButton, 2, 0, 1, 1);
 
-        stopTrackingButton = new QPushButton(horizontalLayoutWidget_11);
+        stopTrackingButton = new QPushButton(groupBoxSetting);
         stopTrackingButton->setObjectName("stopTrackingButton");
-        stopTrackingButton->setEnabled(true);
-        stopTrackingButton->setMaximumSize(QSize(120, 16777215));
-        stopTrackingButton->setFont(font2);
 
-        horizontalLayout_11->addWidget(stopTrackingButton);
+        gridLayoutSetting->addWidget(stopTrackingButton, 2, 1, 1, 1);
 
-        groupBox_3 = new QGroupBox(centralwidget);
-        groupBox_3->setObjectName("groupBox_3");
-        groupBox_3->setGeometry(QRect(70, 440, 751, 221));
-        groupBox_3->setFont(font1);
-        tableWidget = new QTableWidget(groupBox_3);
-        tableWidget->setObjectName("tableWidget");
-        tableWidget->setGeometry(QRect(0, 21, 751, 201));
-        groupBox_4 = new QGroupBox(centralwidget);
-        groupBox_4->setObjectName("groupBox_4");
-        groupBox_4->setGeometry(QRect(70, 660, 751, 141));
-        groupBox_4->setFont(font1);
-        horizontalLayoutWidget_5 = new QWidget(groupBox_4);
-        horizontalLayoutWidget_5->setObjectName("horizontalLayoutWidget_5");
-        horizontalLayoutWidget_5->setGeometry(QRect(0, 29, 751, 53));
-        horizontalLayout_5 = new QHBoxLayout(horizontalLayoutWidget_5);
-        horizontalLayout_5->setObjectName("horizontalLayout_5");
-        horizontalLayout_5->setContentsMargins(0, 0, 0, 0);
-        label_7 = new QLabel(horizontalLayoutWidget_5);
-        label_7->setObjectName("label_7");
-        label_7->setMaximumSize(QSize(140, 16777215));
-        label_7->setFont(font2);
+        resetButton = new QPushButton(groupBoxSetting);
+        resetButton->setObjectName("resetButton");
 
-        horizontalLayout_5->addWidget(label_7);
+        gridLayoutSetting->addWidget(resetButton, 2, 2, 1, 1);
 
-        totalLabel = new QLabel(horizontalLayoutWidget_5);
-        totalLabel->setObjectName("totalLabel");
-        totalLabel->setMaximumSize(QSize(200, 16777215));
-        totalLabel->setFont(font2);
-        totalLabel->setAlignment(Qt::AlignmentFlag::AlignCenter);
+        groupBoxInput = new QGroupBox(centralwidget);
+        groupBoxInput->setObjectName("groupBoxInput");
+        groupBoxInput->setGeometry(QRect(10, 68, 517, 80));
+        horizontalLayoutInput = new QHBoxLayout(groupBoxInput);
+        horizontalLayoutInput->setObjectName("horizontalLayoutInput");
+        appSelectCombo = new QComboBox(groupBoxInput);
+        appSelectCombo->setObjectName("appSelectCombo");
 
-        horizontalLayout_5->addWidget(totalLabel);
+        horizontalLayoutInput->addWidget(appSelectCombo);
 
-        label_8 = new QLabel(horizontalLayoutWidget_5);
-        label_8->setObjectName("label_8");
-        label_8->setMaximumSize(QSize(50, 16777215));
-        label_8->setFont(font2);
-        label_8->setAlignment(Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter);
+        addButton = new QPushButton(groupBoxInput);
+        addButton->setObjectName("addButton");
 
-        horizontalLayout_5->addWidget(label_8);
+        horizontalLayoutInput->addWidget(addButton);
 
-        label_12 = new QLabel(horizontalLayoutWidget_5);
-        label_12->setObjectName("label_12");
-        label_12->setMaximumSize(QSize(50, 16777215));
-        label_12->setFont(font2);
-        label_12->setAlignment(Qt::AlignmentFlag::AlignCenter);
-
-        horizontalLayout_5->addWidget(label_12);
-
-        statusLabel = new QLabel(horizontalLayoutWidget_5);
+        groupBoxSetting_2 = new QGroupBox(centralwidget);
+        groupBoxSetting_2->setObjectName("groupBoxSetting_2");
+        groupBoxSetting_2->setGeometry(QRect(10, 490, 517, 148));
+        gridLayoutSetting_2 = new QGridLayout(groupBoxSetting_2);
+        gridLayoutSetting_2->setObjectName("gridLayoutSetting_2");
+        statusLabel = new QLabel(groupBoxSetting_2);
         statusLabel->setObjectName("statusLabel");
-        statusLabel->setMaximumSize(QSize(200, 16777215));
-        statusLabel->setFont(font2);
-        statusLabel->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
-        horizontalLayout_5->addWidget(statusLabel);
+        gridLayoutSetting_2->addWidget(statusLabel, 1, 1, 1, 1);
 
-        horizontalLayoutWidget_6 = new QWidget(groupBox_4);
-        horizontalLayoutWidget_6->setObjectName("horizontalLayoutWidget_6");
-        horizontalLayoutWidget_6->setGeometry(QRect(0, 80, 751, 51));
-        horizontalLayout_6 = new QHBoxLayout(horizontalLayoutWidget_6);
-        horizontalLayout_6->setObjectName("horizontalLayout_6");
-        horizontalLayout_6->setContentsMargins(0, 0, 0, 0);
-        progressBar = new QProgressBar(horizontalLayoutWidget_6);
+        labelLimit_2 = new QLabel(groupBoxSetting_2);
+        labelLimit_2->setObjectName("labelLimit_2");
+        labelLimit_2->setMaximumSize(QSize(100, 16777215));
+
+        gridLayoutSetting_2->addWidget(labelLimit_2, 0, 0, 1, 1);
+
+        totalLabel = new QLabel(groupBoxSetting_2);
+        totalLabel->setObjectName("totalLabel");
+
+        gridLayoutSetting_2->addWidget(totalLabel, 0, 1, 1, 1);
+
+        labelLimit_3 = new QLabel(groupBoxSetting_2);
+        labelLimit_3->setObjectName("labelLimit_3");
+        labelLimit_3->setMaximumSize(QSize(100, 16777215));
+
+        gridLayoutSetting_2->addWidget(labelLimit_3, 1, 0, 1, 1);
+
+        progressBar = new QProgressBar(groupBoxSetting_2);
         progressBar->setObjectName("progressBar");
         progressBar->setValue(24);
 
-        horizontalLayout_6->addWidget(progressBar);
+        gridLayoutSetting_2->addWidget(progressBar, 2, 0, 1, 2);
 
-        label_9 = new QLabel(horizontalLayoutWidget_6);
-        label_9->setObjectName("label_9");
-        label_9->setMaximumSize(QSize(150, 16777215));
-        label_9->setFont(font2);
-
-        horizontalLayout_6->addWidget(label_9);
-
-        horizontalLayoutWidget_7 = new QWidget(centralwidget);
-        horizontalLayoutWidget_7->setObjectName("horizontalLayoutWidget_7");
-        horizontalLayoutWidget_7->setGeometry(QRect(70, 810, 281, 41));
-        horizontalLayout_7 = new QHBoxLayout(horizontalLayoutWidget_7);
-        horizontalLayout_7->setObjectName("horizontalLayout_7");
-        horizontalLayout_7->setContentsMargins(0, 0, 0, 0);
-        saveButton = new QPushButton(horizontalLayoutWidget_7);
+        horizontalLayoutWidget = new QWidget(centralwidget);
+        horizontalLayoutWidget->setObjectName("horizontalLayoutWidget");
+        horizontalLayoutWidget->setGeometry(QRect(10, 650, 251, 41));
+        horizontalLayout = new QHBoxLayout(horizontalLayoutWidget);
+        horizontalLayout->setObjectName("horizontalLayout");
+        horizontalLayout->setContentsMargins(0, 0, 0, 0);
+        saveButton = new QPushButton(horizontalLayoutWidget);
         saveButton->setObjectName("saveButton");
 
-        horizontalLayout_7->addWidget(saveButton);
+        horizontalLayout->addWidget(saveButton);
 
-        loadCsvButton = new QPushButton(horizontalLayoutWidget_7);
+        loadCsvButton = new QPushButton(horizontalLayoutWidget);
         loadCsvButton->setObjectName("loadCsvButton");
 
-        horizontalLayout_7->addWidget(loadCsvButton);
+        horizontalLayout->addWidget(loadCsvButton);
 
         MainWindow->setCentralWidget(centralwidget);
         statusbar = new QStatusBar(MainWindow);
@@ -386,32 +217,24 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "TimeLock", nullptr));
-        groupBox->setTitle(QCoreApplication::translate("MainWindow", "Input dan Penggunaan", nullptr));
-        label_2->setText(QCoreApplication::translate("MainWindow", "Nama Aplikasi :", nullptr));
-        label_3->setText(QCoreApplication::translate("MainWindow", "Durasi (menit) :", nullptr));
-        addButton->setText(QCoreApplication::translate("MainWindow", "Tambah", nullptr));
-        groupBox_2->setTitle(QCoreApplication::translate("MainWindow", "Pengaturan dan Kontrol", nullptr));
-        label_4->setText(QCoreApplication::translate("MainWindow", "Batas Waktu harian :", nullptr));
-        label_6->setText(QCoreApplication::translate("MainWindow", "Menit", nullptr));
+        groupBoxReport->setTitle(QCoreApplication::translate("MainWindow", "Laporan Penggunaan", nullptr));
+        groupBoxSetting->setTitle(QCoreApplication::translate("MainWindow", "Pengaturan dan Kontrol", nullptr));
+        labelLimit->setText(QCoreApplication::translate("MainWindow", "Batas Waktu Harian:", nullptr));
         checklimitButton->setText(QCoreApplication::translate("MainWindow", "Cek Semua Batas", nullptr));
-        label_5->setText(QCoreApplication::translate("MainWindow", "Cari :", nullptr));
-        searchButton->setText(QCoreApplication::translate("MainWindow", "Search", nullptr));
-        sortButton->setText(QCoreApplication::translate("MainWindow", "Urutkan Durasi", nullptr));
-        autoTrackCheck->setText(QCoreApplication::translate("MainWindow", "Aktifkan pelacakan Otomatis", nullptr));
-        label_15->setText(QCoreApplication::translate("MainWindow", "Aplikasi saat ini :", nullptr));
-        currentAppLabel->setText(QString());
+        autoTrackCheck->setText(QCoreApplication::translate("MainWindow", "Aktifkan Pelacakan Otomatis", nullptr));
+        currentAppLabel->setText(QCoreApplication::translate("MainWindow", "-", nullptr));
         startTrackingButton->setText(QCoreApplication::translate("MainWindow", "Mulai Tracking", nullptr));
         stopTrackingButton->setText(QCoreApplication::translate("MainWindow", "Berhenti Tracking", nullptr));
-        groupBox_3->setTitle(QCoreApplication::translate("MainWindow", "Laporan Penggunaan", nullptr));
-        groupBox_4->setTitle(QCoreApplication::translate("MainWindow", "Ringkasan Penggunaan", nullptr));
-        label_7->setText(QCoreApplication::translate("MainWindow", "Total Waktu :", nullptr));
-        totalLabel->setText(QString());
-        label_8->setText(QCoreApplication::translate("MainWindow", "Menit", nullptr));
-        label_12->setText(QCoreApplication::translate("MainWindow", "Status :", nullptr));
-        statusLabel->setText(QString());
-        label_9->setText(QCoreApplication::translate("MainWindow", "dari batas", nullptr));
-        saveButton->setText(QCoreApplication::translate("MainWindow", "Simpan ke CSV", nullptr));
-        loadCsvButton->setText(QCoreApplication::translate("MainWindow", "Muat dari CSV", nullptr));
+        resetButton->setText(QCoreApplication::translate("MainWindow", "Reset", nullptr));
+        groupBoxInput->setTitle(QCoreApplication::translate("MainWindow", "Input dan Penggunaan", nullptr));
+        addButton->setText(QCoreApplication::translate("MainWindow", "Tambah", nullptr));
+        groupBoxSetting_2->setTitle(QCoreApplication::translate("MainWindow", "Ringkasan Penggunaan", nullptr));
+        statusLabel->setText(QCoreApplication::translate("MainWindow", "-", nullptr));
+        labelLimit_2->setText(QCoreApplication::translate("MainWindow", "Total Waktu :", nullptr));
+        totalLabel->setText(QCoreApplication::translate("MainWindow", "-", nullptr));
+        labelLimit_3->setText(QCoreApplication::translate("MainWindow", "Status", nullptr));
+        saveButton->setText(QCoreApplication::translate("MainWindow", "Simpan", nullptr));
+        loadCsvButton->setText(QCoreApplication::translate("MainWindow", "Muat", nullptr));
     } // retranslateUi
 
 };

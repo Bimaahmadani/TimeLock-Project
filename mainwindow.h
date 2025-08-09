@@ -25,28 +25,23 @@ public:
     ~MainWindow();
 
 private slots:
-    // Manual input
-    void on_addButton_clicked();
+    void on_addButton_clicked();      // Tambah aplikasi dari combo box
     void on_checklimitButton_clicked();
-    void on_searchButton_clicked();
     void on_sortButton_clicked();
     void on_saveButton_clicked();
     void on_loadCsvButton_clicked();
-
-    // Auto tracking
     void startAutoTracking();
     void stopAutoTracking();
     void trackActiveWindow();
+    void on_resetButton_clicked();
 
 private:
     Ui::MainWindow *ui;
     QVector<AppUsage> dataList;
     int dailyLimit = 120;
     QTimer *trackingTimer;
-    QString lastTrackedApp;
-    int elapsedSeconds = 0;
+    QSet<QString> notifiedApps;
 
-    // Utility
     QString getActiveWindowTitle();
     void updateTable();
     void updateSummary();

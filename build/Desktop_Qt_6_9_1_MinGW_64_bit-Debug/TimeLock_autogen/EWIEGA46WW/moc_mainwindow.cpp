@@ -42,13 +42,13 @@ template <> constexpr inline auto MainWindow::qt_create_metaobjectdata<qt_meta_t
         "on_addButton_clicked",
         "",
         "on_checklimitButton_clicked",
-        "on_searchButton_clicked",
         "on_sortButton_clicked",
         "on_saveButton_clicked",
         "on_loadCsvButton_clicked",
         "startAutoTracking",
         "stopAutoTracking",
-        "trackActiveWindow"
+        "trackActiveWindow",
+        "on_resetButton_clicked"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -56,19 +56,19 @@ template <> constexpr inline auto MainWindow::qt_create_metaobjectdata<qt_meta_t
         QtMocHelpers::SlotData<void()>(1, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'on_checklimitButton_clicked'
         QtMocHelpers::SlotData<void()>(3, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'on_searchButton_clicked'
-        QtMocHelpers::SlotData<void()>(4, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'on_sortButton_clicked'
-        QtMocHelpers::SlotData<void()>(5, 2, QMC::AccessPrivate, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(4, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'on_saveButton_clicked'
-        QtMocHelpers::SlotData<void()>(6, 2, QMC::AccessPrivate, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(5, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'on_loadCsvButton_clicked'
-        QtMocHelpers::SlotData<void()>(7, 2, QMC::AccessPrivate, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(6, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'startAutoTracking'
-        QtMocHelpers::SlotData<void()>(8, 2, QMC::AccessPrivate, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(7, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'stopAutoTracking'
-        QtMocHelpers::SlotData<void()>(9, 2, QMC::AccessPrivate, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(8, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'trackActiveWindow'
+        QtMocHelpers::SlotData<void()>(9, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_resetButton_clicked'
         QtMocHelpers::SlotData<void()>(10, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
@@ -95,13 +95,13 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         switch (_id) {
         case 0: _t->on_addButton_clicked(); break;
         case 1: _t->on_checklimitButton_clicked(); break;
-        case 2: _t->on_searchButton_clicked(); break;
-        case 3: _t->on_sortButton_clicked(); break;
-        case 4: _t->on_saveButton_clicked(); break;
-        case 5: _t->on_loadCsvButton_clicked(); break;
-        case 6: _t->startAutoTracking(); break;
-        case 7: _t->stopAutoTracking(); break;
-        case 8: _t->trackActiveWindow(); break;
+        case 2: _t->on_sortButton_clicked(); break;
+        case 3: _t->on_saveButton_clicked(); break;
+        case 4: _t->on_loadCsvButton_clicked(); break;
+        case 5: _t->startAutoTracking(); break;
+        case 6: _t->stopAutoTracking(); break;
+        case 7: _t->trackActiveWindow(); break;
+        case 8: _t->on_resetButton_clicked(); break;
         default: ;
         }
     }
