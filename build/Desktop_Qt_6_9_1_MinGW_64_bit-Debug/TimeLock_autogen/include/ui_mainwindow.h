@@ -11,7 +11,6 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
@@ -39,12 +38,11 @@ public:
     QTableWidget *tableWidget;
     QGroupBox *groupBoxSetting;
     QGridLayout *gridLayoutSetting;
+    QPushButton *startTrackingButton;
+    QPushButton *checklimitButton;
     QLabel *labelLimit;
     QSpinBox *limitdurationBox;
-    QPushButton *checklimitButton;
-    QCheckBox *autoTrackCheck;
     QLabel *currentAppLabel;
-    QPushButton *startTrackingButton;
     QPushButton *stopTrackingButton;
     QPushButton *resetButton;
     QGroupBox *groupBoxInput;
@@ -99,6 +97,16 @@ public:
         groupBoxSetting->setGeometry(QRect(10, 155, 517, 148));
         gridLayoutSetting = new QGridLayout(groupBoxSetting);
         gridLayoutSetting->setObjectName("gridLayoutSetting");
+        startTrackingButton = new QPushButton(groupBoxSetting);
+        startTrackingButton->setObjectName("startTrackingButton");
+
+        gridLayoutSetting->addWidget(startTrackingButton, 1, 0, 1, 1);
+
+        checklimitButton = new QPushButton(groupBoxSetting);
+        checklimitButton->setObjectName("checklimitButton");
+
+        gridLayoutSetting->addWidget(checklimitButton, 0, 2, 1, 1);
+
         labelLimit = new QLabel(groupBoxSetting);
         labelLimit->setObjectName("labelLimit");
 
@@ -109,35 +117,20 @@ public:
 
         gridLayoutSetting->addWidget(limitdurationBox, 0, 1, 1, 1);
 
-        checklimitButton = new QPushButton(groupBoxSetting);
-        checklimitButton->setObjectName("checklimitButton");
-
-        gridLayoutSetting->addWidget(checklimitButton, 0, 2, 1, 1);
-
-        autoTrackCheck = new QCheckBox(groupBoxSetting);
-        autoTrackCheck->setObjectName("autoTrackCheck");
-
-        gridLayoutSetting->addWidget(autoTrackCheck, 1, 0, 1, 1);
-
         currentAppLabel = new QLabel(groupBoxSetting);
         currentAppLabel->setObjectName("currentAppLabel");
 
-        gridLayoutSetting->addWidget(currentAppLabel, 1, 1, 1, 1);
-
-        startTrackingButton = new QPushButton(groupBoxSetting);
-        startTrackingButton->setObjectName("startTrackingButton");
-
-        gridLayoutSetting->addWidget(startTrackingButton, 2, 0, 1, 1);
+        gridLayoutSetting->addWidget(currentAppLabel, 1, 1, 1, 2);
 
         stopTrackingButton = new QPushButton(groupBoxSetting);
         stopTrackingButton->setObjectName("stopTrackingButton");
 
-        gridLayoutSetting->addWidget(stopTrackingButton, 2, 1, 1, 1);
+        gridLayoutSetting->addWidget(stopTrackingButton, 2, 0, 1, 1);
 
         resetButton = new QPushButton(groupBoxSetting);
         resetButton->setObjectName("resetButton");
 
-        gridLayoutSetting->addWidget(resetButton, 2, 2, 1, 1);
+        gridLayoutSetting->addWidget(resetButton, 2, 1, 1, 1);
 
         groupBoxInput = new QGroupBox(centralwidget);
         groupBoxInput->setObjectName("groupBoxInput");
@@ -219,11 +212,10 @@ public:
         label->setText(QCoreApplication::translate("MainWindow", "TimeLock", nullptr));
         groupBoxReport->setTitle(QCoreApplication::translate("MainWindow", "Laporan Penggunaan", nullptr));
         groupBoxSetting->setTitle(QCoreApplication::translate("MainWindow", "Pengaturan dan Kontrol", nullptr));
-        labelLimit->setText(QCoreApplication::translate("MainWindow", "Batas Waktu Harian:", nullptr));
-        checklimitButton->setText(QCoreApplication::translate("MainWindow", "Cek Semua Batas", nullptr));
-        autoTrackCheck->setText(QCoreApplication::translate("MainWindow", "Aktifkan Pelacakan Otomatis", nullptr));
-        currentAppLabel->setText(QCoreApplication::translate("MainWindow", "-", nullptr));
         startTrackingButton->setText(QCoreApplication::translate("MainWindow", "Mulai Tracking", nullptr));
+        checklimitButton->setText(QCoreApplication::translate("MainWindow", "Cek Semua Batas", nullptr));
+        labelLimit->setText(QCoreApplication::translate("MainWindow", "Batas Waktu Harian:", nullptr));
+        currentAppLabel->setText(QCoreApplication::translate("MainWindow", "-", nullptr));
         stopTrackingButton->setText(QCoreApplication::translate("MainWindow", "Berhenti Tracking", nullptr));
         resetButton->setText(QCoreApplication::translate("MainWindow", "Reset", nullptr));
         groupBoxInput->setTitle(QCoreApplication::translate("MainWindow", "Input dan Penggunaan", nullptr));

@@ -176,32 +176,44 @@ void MainWindow::updateTable() {
 
 // Update ringkasan
 void MainWindow::updateSummary() {
-    int totalSeconds = 0;
+    QString activeTitle = getActiveWindowTitle();
+
     for (const auto &app : dataList) {
-        totalSeconds += (app.duration * 60) + app.seconds;
+        if (activeTitle.contains(app.name, Qt::CaseInsensitive)) {
+
+            // Hitung total detik penggunaan aplikasi aktif
+            int totalSeconds = (app.duration * 60) + app.seconds;
+
+            // Format total waktu jadi MM:SS
+            int minutes = totalSeconds / 60;
+            int seconds = totalSeconds % 60;
+            ui->totalLabel->setText(QString("%1:%2")
+                                        .arg(minutes, 2, 10, QChar('0'))
+                                        .arg(seconds, 2, 10, QChar('0')));
+
+            // Hitung batas total harian (dalam detik)
+            int totalLimitSeconds = dailyLimit * 60;
+
+            // Tentukan status untuk aplikasi aktif
+            QString status;
+            if (totalSeconds > totalLimitSeconds) {
+                status = "Melebihi Batas";
+            } else if (totalSeconds >= totalLimitSeconds * 0.8) {
+                status = "Mendekati Batas";
+            } else {
+                status = "Aman";
+            }
+            ui->statusLabel->setText(status);
+
+            return; // keluar setelah menemukan aplikasi aktif
+        }
     }
 
-    // Format total waktu jadi MM:SS
-    int minutes = totalSeconds / 60;
-    int seconds = totalSeconds % 60;
-    ui->totalLabel->setText(QString("%1:%2")
-                                .arg(minutes, 2, 10, QChar('0'))
-                                .arg(seconds, 2, 10, QChar('0')));
-
-    // Hitung batas total harian (dalam detik)
-    int totalLimitSeconds = dailyLimit * 60;
-
-    // Tentukan status global
-    QString status;
-    if (totalSeconds > totalLimitSeconds) {
-        status = "Melebihi Batas";
-    } else if (totalSeconds >= totalLimitSeconds * 0.8) {
-        status = "Mendekati Batas";
-    } else {
-        status = "Aman";
-    }
-    ui->statusLabel->setText(status);
+    // Jika tidak ada aplikasi yang cocok
+    ui->totalLabel->setText("00:00");
+    ui->statusLabel->setText("-");
 }
+
 
 
 // Cek batas untuk semua aplikasi
@@ -243,18 +255,24 @@ void MainWindow::loadFromCsv(const QString &filePath) {
 
 
 void MainWindow::on_resetButton_clicked() {
-    QString selectedApp = ui->appSelectCombo->currentText();
-    for (auto &app : dataList) {
-        if (app.name == selectedApp) {
-            app.duration = 0;   // Reset menit
-            app.seconds = 0;    // 🔹 Reset detik juga
-            app.status = "Aman";
+    QList<QTableWidgetItem*> selectedItems = ui->tableWidget->selectedItems();
+    QSet<int> selectedRows;
 
-            // Hapus dari daftar notifikasi supaya bisa memberi peringatan lagi
-            notifiedApps.remove(app.name);
-            break;
+    // Ambil semua baris yang dipilih
+    for (auto *item : selectedItems) {
+        selectedRows.insert(item->row());
+    }
+
+    // Reset semua baris terpilih
+    for (int row : selectedRows) {
+        if (row >= 0 && row < dataList.size()) {
+            dataList[row].duration = 0;
+            dataList[row].seconds = 0;
+            dataList[row].status = "Aman";
+            notifiedApps.remove(dataList[row].name);
         }
     }
+
     updateTable();
     updateSummary();
 }
