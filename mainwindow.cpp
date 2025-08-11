@@ -159,30 +159,13 @@ void MainWindow::trackActiveWindow() {
     }
 }
 
-// Update tabel
-void MainWindow::updateTable() {
-    ui->tableWidget->setRowCount(dataList.size());
-    for (int i = 0; i < dataList.size(); ++i) {
-        const auto &app = dataList[i];
-
-        ui->tableWidget->setItem(i, 0, new QTableWidgetItem(app.name));
-        ui->tableWidget->setItem(i, 1, new QTableWidgetItem(
-                                           QString("%1:%2")
-                                               .arg(app.duration, 2, 10, QChar('0'))
-                                               .arg(app.seconds, 2, 10, QChar('0'))
-                                           ));
-        ui->tableWidget->setItem(i, 2, new QTableWidgetItem(app.status));
-    }
-}
-
-
 // Update ringkasan
 void MainWindow::updateSummary() {
     QString activeTitle = getActiveWindowTitle();
+    bool found = false;
 
     for (const auto &app : dataList) {
         if (activeTitle.contains(app.name, Qt::CaseInsensitive)) {
-
             // Hitung total detik penggunaan aplikasi aktif
             int totalSeconds = (app.duration * 60) + app.seconds;
 
@@ -207,16 +190,33 @@ void MainWindow::updateSummary() {
             }
             ui->statusLabel->setText(status);
 
-            return; // keluar setelah menemukan aplikasi aktif
+            found = true;
+            break; // keluar loop tapi tidak return dari fungsi
         }
     }
 
-    // Jika tidak ada aplikasi yang cocok
-    ui->totalLabel->setText("00:00");
-    ui->statusLabel->setText("-");
+    if (!found) {
+        ui->totalLabel->setText("00:00");
+        ui->statusLabel->setText("-");
+    }
 }
 
 
+// Update tabel
+void MainWindow::updateTable() {
+    ui->tableWidget->setRowCount(dataList.size());
+    for (int i = 0; i < dataList.size(); ++i) {
+        const auto &app = dataList[i];
+
+        ui->tableWidget->setItem(i, 0, new QTableWidgetItem(app.name));
+        ui->tableWidget->setItem(i, 1, new QTableWidgetItem(
+                                           QString("%1:%2")
+                                               .arg(app.duration, 2, 10, QChar('0'))
+                                               .arg(app.seconds, 2, 10, QChar('0'))
+                                           ));
+        ui->tableWidget->setItem(i, 2, new QTableWidgetItem(app.status));
+    }
+}
 
 // Cek batas untuk semua aplikasi
 void MainWindow::checkLimitForAll() {

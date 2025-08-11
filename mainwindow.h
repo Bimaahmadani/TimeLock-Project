@@ -46,6 +46,7 @@ private:
     QString lastActiveApp;     // untuk cek pergantian aplikas
 
     QString getActiveWindowTitle();
+    // QString currentActiveApp;
     void updateTable();
     void updateSummary();
     void checkLimitForAll();
