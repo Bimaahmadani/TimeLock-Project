@@ -620,6 +620,6 @@ D:/KULIAH/Semester Antara/Alprog/Tugas Besar/TimeLock/mainwindow.h
  mdp:D:/QT_Folder/Tools/mingw1310_64/x86_64-w64-mingw32/include/wow64apiset.h
  mdp:D:/QT_Folder/Tools/mingw1310_64/x86_64-w64-mingw32/include/wtypes.h
  mdp:D:/QT_Folder/Tools/mingw1310_64/x86_64-w64-mingw32/include/wtypesbase.h
-D:/KULIAH/Semester Antara/Alprog/Tugas Besar/TimeLock/main.cpp
 D:/KULIAH/Semester Antara/Alprog/Tugas Besar/TimeLock/mainwindow.cpp
  uic:ui_mainwindow.h
+D:/KULIAH/Semester Antara/Alprog/Tugas Besar/TimeLock/main.cpp

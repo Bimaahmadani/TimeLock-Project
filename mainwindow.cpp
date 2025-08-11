@@ -18,6 +18,8 @@ QString MainWindow::getActiveWindowTitle() {
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow), trackingTimer(new QTimer(this)) {
     ui->setupUi(this);
+    ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
 
     // Isi combo box aplikasi
     ui->appSelectCombo->addItems({"Instagram", "YouTube", "TikTok", "Facebook", "Twitter"});
